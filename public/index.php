@@ -27,5 +27,14 @@ $router->addRoute('GET', '/accounting_app/public/reports/sales', [new ReportCont
 $router->addRoute('POST', '/accounting_app/public/reports/sales', [new ReportController(), 'salesReport']);
 $router->addRoute('GET', '/accounting_app/public/reports/purchases', [new ReportController(), 'purchaseReport']);
 $router->addRoute('POST', '/accounting_app/public/reports/purchases', [new ReportController(), 'purchaseReport']);
+require_once __DIR__ . '/../app/controllers/InventoryController.php';
+
+$router->addRoute('GET', '/accounting_app/public/inventory', [new InventoryController(), 'index']);
+$router->addRoute('GET', '/accounting_app/public/inventory/update/{id}', [new InventoryController(), 'updateStock']);
+$router->addRoute('POST', '/accounting_app/public/inventory/update/{id}', [new InventoryController(), 'updateStock']);
+$router->addRoute('GET', '/accounting_app/public/inventory/history/{id}', [new InventoryController(), 'stockHistory']);
+require_once __DIR__ . '/../app/controllers/DashboardController.php';
+
+$router->addRoute('GET', '/accounting_app/public/dashboard', [new DashboardController(), 'index']);
 
 $router->dispatch();
