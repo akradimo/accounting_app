@@ -4,8 +4,8 @@ require_once __DIR__ . '/../models/Person.php';
 
 class PersonController {
     public function index() {
-        $persons = Person::findAll();
-        require_once __DIR__ . '/../views/persons/index.php';
+        $persons = Person::findAll(); // دریافت لیست اشخاص از مدل
+        require_once __DIR__ . '/../views/persons/index.php'; // بارگذاری ویو
     }
 
     public function create() {
@@ -17,7 +17,7 @@ class PersonController {
             $address = $_POST['address'];
 
             Person::create($name, $type, $phone, $email, $address);
-            header('Location: /persons');
+            header('Location: /accounting_app/public/persons');
             exit();
         }
 
@@ -32,7 +32,7 @@ class PersonController {
             $address = $_POST['address'];
 
             Person::update($id, $name, $phone, $email, $address);
-            header('Location: /persons');
+            header('Location: /accounting_app/public/persons');
             exit();
         }
 
@@ -42,7 +42,7 @@ class PersonController {
 
     public function delete($id) {
         Person::delete($id);
-        header('Location: /persons');
+        header('Location: /accounting_app/public/persons');
         exit();
     }
 }

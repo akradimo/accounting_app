@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>لیست اشخاص</h1>
-    <a href="/persons/create">افزودن شخص جدید</a>
+    <a href="/accounting_app/public/persons/create">افزودن شخص جدید</a>
     <table border="1">
         <thead>
             <tr>
@@ -19,19 +19,25 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($persons as $person): ?>
+            <?php if (!empty($persons)): ?>
+                <?php foreach ($persons as $person): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($person['name']) ?></td>
+                        <td><?= htmlspecialchars($person['type']) ?></td>
+                        <td><?= htmlspecialchars($person['phone']) ?></td>
+                        <td><?= htmlspecialchars($person['email']) ?></td>
+                        <td><?= htmlspecialchars($person['address']) ?></td>
+                        <td>
+                            <a href="/accounting_app/public/persons/edit/<?= $person['id'] ?>">ویرایش</a>
+                            <a href="/accounting_app/public/persons/delete/<?= $person['id'] ?>" onclick="return confirm('آیا مطمئن هستید؟')">حذف</a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
                 <tr>
-                    <td><?= htmlspecialchars($person['name']) ?></td>
-                    <td><?= htmlspecialchars($person['type']) ?></td>
-                    <td><?= htmlspecialchars($person['phone']) ?></td>
-                    <td><?= htmlspecialchars($person['email']) ?></td>
-                    <td><?= htmlspecialchars($person['address']) ?></td>
-                    <td>
-                        <a href="/persons/edit/<?= $person['id'] ?>">ویرایش</a>
-                        <a href="/persons/delete/<?= $person['id'] ?>" onclick="return confirm('آیا مطمئن هستید؟')">حذف</a>
-                    </td>
+                    <td colspan="6">هیچ شخصی یافت نشد.</td>
                 </tr>
-            <?php endforeach; ?>
+            <?php endif; ?>
         </tbody>
     </table>
 </body>
