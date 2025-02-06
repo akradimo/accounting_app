@@ -14,3 +14,12 @@ $router->addRoute('POST', '/register', [new AuthController(), 'register']);
 $router->addRoute('GET', '/logout', [new AuthController(), 'logout']);
 
 $router->dispatch();
+
+require_once __DIR__ . '/../app/controllers/PersonController.php';
+
+$router->addRoute('GET', '/persons', [new PersonController(), 'index']);
+$router->addRoute('GET', '/persons/create', [new PersonController(), 'create']);
+$router->addRoute('POST', '/persons/create', [new PersonController(), 'create']);
+$router->addRoute('GET', '/persons/edit/{id}', [new PersonController(), 'edit']);
+$router->addRoute('POST', '/persons/edit/{id}', [new PersonController(), 'edit']);
+$router->addRoute('GET', '/persons/delete/{id}', [new PersonController(), 'delete']);
