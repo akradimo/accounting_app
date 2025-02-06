@@ -8,7 +8,7 @@ class Database {
     private $conn;
 
     public function __construct() {
-        $config = require __DIR__ . '/../config/database.php';
+        $config = require __DIR__ . '/../../config/database.php'; // مسیر اصلاح‌شده
         $this->host = $config['host'];
         $this->dbname = $config['dbname'];
         $this->username = $config['username'];
