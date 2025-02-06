@@ -28,4 +28,16 @@ class ReportController {
 
         require_once __DIR__ . '/../views/reports/purchase_report_form.php';
     }
+    public function profitLoss() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $startDate = $_POST['start_date'];
+            $endDate = $_POST['end_date'];
+
+            $report = Report::getProfitLossReport($startDate, $endDate);
+            require_once __DIR__ . '/../views/reports/profit_loss.php';
+            return;
+        }
+
+        require_once __DIR__ . '/../views/reports/profit_loss_form.php';
+    }
 }

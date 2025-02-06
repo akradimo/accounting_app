@@ -45,5 +45,8 @@ require_once __DIR__ . '/../app/controllers/BackupController.php';
 $router->addRoute('GET', '/accounting_app/public/backup', [new BackupController(), 'index']);
 $router->addRoute('GET', '/accounting_app/public/backup/create', [new BackupController(), 'create']);
 $router->addRoute('POST', '/accounting_app/public/backup/restore', [new BackupController(), 'restore']);
+require_once __DIR__ . '/../app/controllers/ReportController.php';
 
+$router->addRoute('GET', '/accounting_app/public/reports/profit-loss', [new ReportController(), 'profitLoss']);
+$router->addRoute('POST', '/accounting_app/public/reports/profit-loss', [new ReportController(), 'profitLoss']);
 $router->dispatch();
