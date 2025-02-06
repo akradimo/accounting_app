@@ -36,5 +36,14 @@ $router->addRoute('GET', '/accounting_app/public/inventory/history/{id}', [new I
 require_once __DIR__ . '/../app/controllers/DashboardController.php';
 
 $router->addRoute('GET', '/accounting_app/public/dashboard', [new DashboardController(), 'index']);
+require_once __DIR__ . '/../app/controllers/SettingController.php';
+
+$router->addRoute('GET', '/accounting_app/public/settings', [new SettingController(), 'index']);
+$router->addRoute('POST', '/accounting_app/public/settings/update', [new SettingController(), 'update']);
+require_once __DIR__ . '/../app/controllers/BackupController.php';
+
+$router->addRoute('GET', '/accounting_app/public/backup', [new BackupController(), 'index']);
+$router->addRoute('GET', '/accounting_app/public/backup/create', [new BackupController(), 'create']);
+$router->addRoute('POST', '/accounting_app/public/backup/restore', [new BackupController(), 'restore']);
 
 $router->dispatch();
