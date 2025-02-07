@@ -1,5 +1,8 @@
 <?php
 
+ini_set('display_errors', 1);  
+ini_set('display_startup_errors', 1);  
+error_reporting(E_ALL);  
 require_once __DIR__ . '/../app/core/Database.php';
 require_once __DIR__ . '/../app/core/Router.php';
 require_once __DIR__ . '/../app/controllers/ProductController.php';
@@ -49,4 +52,29 @@ require_once __DIR__ . '/../app/controllers/ReportController.php';
 
 $router->addRoute('GET', '/accounting_app/public/reports/profit-loss', [new ReportController(), 'profitLoss']);
 $router->addRoute('POST', '/accounting_app/public/reports/profit-loss', [new ReportController(), 'profitLoss']);
+
+require_once __DIR__ . '/../app/controllers/RoleController.php';
+
+$router->addRoute('GET', '/accounting_app/public/roles', [new RoleController(), 'index']);
+$router->addRoute('GET', '/accounting_app/public/roles/create', [new RoleController(), 'create']);
+$router->addRoute('POST', '/accounting_app/public/roles/create', [new RoleController(), 'create']);
+$router->addRoute('GET', '/accounting_app/public/roles/edit/{id}', [new RoleController(), 'edit']);
+$router->addRoute('POST', '/accounting_app/public/roles/edit/{id}', [new RoleController(), 'edit']);
+$router->addRoute('GET', '/accounting_app/public/roles/delete/{id}', [new RoleController(), 'delete']);
+
+require_once __DIR__ . '/../app/controllers/PrinterController.php';
+
+$router->addRoute('GET', '/accounting_app/public/printer/print/{id}', [new PrinterController(), 'print']);
+
+require_once __DIR__ . '/../app/controllers/ProductController.php';
+
+$router->addRoute('GET', '/accounting_app/public/products/scan-barcode', [new ProductController(), 'scanBarcode']);
+
+
+
 $router->dispatch();
+
+
+
+
+// بقیه کدتون
