@@ -7,10 +7,7 @@ class Setting {
         $db = new Database();
         $conn = $db->connect();
 
-        $stmt = $conn->prepare("
-            SELECT value FROM settings
-            WHERE `key` = :key
-        ");
+        $stmt = $conn->prepare("SELECT value FROM settings WHERE `key` = :key");
         $stmt->execute(['key' => $key]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result ? $result['value'] : null;
@@ -33,12 +30,13 @@ class Setting {
         return $stmt->rowCount();
     }
 
-    public static function getAll() {
+    public static function delete($key) {
         $db = new Database();
         $conn = $db->connect();
 
-        $stmt = $conn->prepare("SELECT * FROM settings");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $conn->prepare("DELETE FROM settings WHERE `key` = :key");
+        $stmt->execute(['key' => $key]);
+
+        return $stmt->rowCount();
     }
 }

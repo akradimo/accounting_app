@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../core/Database.php';
 
-class Product {
+class ProductModel {
     public static function create($name, $category, $barcode, $price, $stock) {
         $db = new Database();
         $conn = $db->connect();

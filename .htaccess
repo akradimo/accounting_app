@@ -1,8 +1,0 @@
-RewriteEngine On
-
-# اگر فایل یا پوشه وجود دارد، آن را مستقیماً بارگذاری کن
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-
-# در غیر این صورت، همه درخواست‌ها را به index.php هدایت کن
-RewriteRule ^(.*)$ index.php [QSA,L]

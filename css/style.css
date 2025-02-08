@@ -1,0 +1,39 @@
+.component-detail-panel {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dx-validationgroup {
+    margin-bottom: 20px;
+}
+
+.dx-texteditor {
+    margin-bottom: 15px;
+}
+
+.dx-button {
+    margin-bottom: 10px;
+}
+
+.dx-nav-bar {
+    margin-top: 20px;
+}
+
+.dx-tabs {
+    border-bottom: 1px solid #ddd;
+}
+
+.dx-tab {
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.dx-tab-selected {
+    border-bottom: 2px solid #007bff;
+}
+
+.hidden {
+    display: none;
+}

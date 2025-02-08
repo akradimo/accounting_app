@@ -3,41 +3,51 @@
 require_once __DIR__ . '/../core/Database.php';
 
 class Report {
-    public static function getProfitLossReport($startDate, $endDate) {
+    public static function getSalesReport($startDate, $endDate) {
         $db = new Database();
         $conn = $db->connect();
 
-        // محاسبه کل فروش‌ها
         $stmt = $conn->prepare("
-            SELECT SUM(total) AS total_sales
-            FROM invoices
-            WHERE type = 'sale' AND created_at BETWEEN :start_date AND :end_date
+            SELECT SUM(total_amount) AS total_sales
+            FROM sales
+            WHERE created_at BETWEEN :start_date AND :end_date
         ");
         $stmt->execute([
             'start_date' => $startDate,
             'end_date' => $endDate
         ]);
-        $sales = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 
-        // محاسبه کل خریدها
+    public static function getExpensesReport($startDate, $endDate) {
+        $db = new Database();
+        $conn = $db->connect();
+
         $stmt = $conn->prepare("
-            SELECT SUM(total) AS total_purchases
-            FROM invoices
-            WHERE type = 'purchase' AND created_at BETWEEN :start_date AND :end_date
+            SELECT SUM(amount) AS total_expenses
+            FROM expenses
+            WHERE date BETWEEN :start_date AND :end_date
         ");
         $stmt->execute([
             'start_date' => $startDate,
             'end_date' => $endDate
         ]);
-        $purchases = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 
-        // محاسبه سود و زیان
-        $profitLoss = [
-            'total_sales' => $sales['total_sales'] ?? 0,
-            'total_purchases' => $purchases['total_purchases'] ?? 0,
-            'profit_loss' => ($sales['total_sales'] ?? 0) - ($purchases['total_purchases'] ?? 0)
-        ];
+    public static function getIncomesReport($startDate, $endDate) {
+        $db = new Database();
+        $conn = $db->connect();
 
-        return $profitLoss;
+        $stmt = $conn->prepare("
+            SELECT SUM(amount) AS total_incomes
+            FROM incomes
+            WHERE date BETWEEN :start_date AND :end_date
+        ");
+        $stmt->execute([
+            'start_date' => $startDate,
+            'end_date' => $endDate
+        ]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }

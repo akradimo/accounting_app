@@ -3,41 +3,39 @@
 require_once __DIR__ . '/../models/Report.php';
 
 class ReportController {
-    public function salesReport() {
+    public function sales() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $startDate = $_POST['start_date'];
             $endDate = $_POST['end_date'];
 
-            $sales = Report::getSalesReport($startDate, $endDate);
-            require_once __DIR__ . '/../views/reports/sales_report.php';
+            $report = Report::getSalesReport($startDate, $endDate);
+            require_once __DIR__ . '/../views/reports/sales.php';
             return;
         }
-
-        require_once __DIR__ . '/../views/reports/sales_report_form.php';
+        require_once __DIR__ . '/../views/reports/sales_form.php';
     }
 
-    public function purchaseReport() {
+    public function expenses() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $startDate = $_POST['start_date'];
             $endDate = $_POST['end_date'];
 
-            $purchases = Report::getPurchaseReport($startDate, $endDate);
-            require_once __DIR__ . '/../views/reports/purchase_report.php';
+            $report = Report::getExpensesReport($startDate, $endDate);
+            require_once __DIR__ . '/../views/reports/expenses.php';
             return;
         }
-
-        require_once __DIR__ . '/../views/reports/purchase_report_form.php';
+        require_once __DIR__ . '/../views/reports/expenses_form.php';
     }
-    public function profitLoss() {
+
+    public function incomes() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $startDate = $_POST['start_date'];
             $endDate = $_POST['end_date'];
 
-            $report = Report::getProfitLossReport($startDate, $endDate);
-            require_once __DIR__ . '/../views/reports/profit_loss.php';
+            $report = Report::getIncomesReport($startDate, $endDate);
+            require_once __DIR__ . '/../views/reports/incomes.php';
             return;
         }
-
-        require_once __DIR__ . '/../views/reports/profit_loss_form.php';
+        require_once __DIR__ . '/../views/reports/incomes_form.php';
     }
 }

@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مدیریت کالاها</title>
+    <title>لیست محصولات</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
     <div class="container mt-5">
-        <h1 class="mb-4">لیست کالاها</h1>
-        <a href="/accounting_app/public/products/create" class="btn btn-primary mb-4">افزودن کالای جدید</a>
+        <h1 class="mb-4">لیست محصولات</h1>
+        <a href="/accounting_app/public/products/create" class="btn btn-primary mb-3">افزودن محصول</a>
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -22,25 +22,19 @@
                 </tr>
             </thead>
             <tbody>
-                <?php if (!empty($products)): ?>
-                    <?php foreach ($products as $product): ?>
-                        <tr>
-                            <td><?= htmlspecialchars($product['name']) ?></td>
-                            <td><?= htmlspecialchars($product['category']) ?></td>
-                            <td><?= htmlspecialchars($product['barcode']) ?></td>
-                            <td><?= htmlspecialchars($product['price']) ?></td>
-                            <td><?= htmlspecialchars($product['stock']) ?></td>
-                            <td>
-                                <a href="/accounting_app/public/products/edit/<?= $product['id'] ?>" class="btn btn-warning btn-sm">ویرایش</a>
-                                <a href="/accounting_app/public/products/delete/<?= $product['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('آیا مطمئن هستید؟')">حذف</a>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                <?php else: ?>
+                <?php foreach ($products as $product): ?>
                     <tr>
-                        <td colspan="6" class="text-center">هیچ کالایی یافت نشد.</td>
+                        <td><?= $product['name'] ?></td>
+                        <td><?= $product['category'] ?></td>
+                        <td><?= $product['barcode'] ?></td>
+                        <td><?= number_format($product['price'], 2) ?> تومان</td>
+                        <td><?= $product['stock'] ?></td>
+                        <td>
+                            <a href="/accounting_app/public/products/edit/<?= $product['id'] ?>" class="btn btn-warning">ویرایش</a>
+                            <a href="/accounting_app/public/products/delete/<?= $product['id'] ?>" class="btn btn-danger">حذف</a>
+                        </td>
                     </tr>
-                <?php endif; ?>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>
